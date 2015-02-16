@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EDDC7854-47B0-4C98-85FC-F2BDAE40AC92</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GooglePlusSwift</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C3AC6537234B40AAB44BCAEAE906F4080533A412</key>
+		<string>https://github.com/antonow/nileswest-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GooglePlusSwift.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C3AC6537234B40AAB44BCAEAE906F4080533A412</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/antonow/nileswest-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C3AC6537234B40AAB44BCAEAE906F4080533A412</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C3AC6537234B40AAB44BCAEAE906F4080533A412</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NWLC-iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
