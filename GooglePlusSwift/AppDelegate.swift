@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings!) {
         
     }
@@ -40,9 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         currentInstallation.saveInBackground()
         
         println("got device id! \(deviceToken)")
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedPush:", name:"NotificationIdentifier", object: nil)
+                                                                            //uh... is colon supposed to be there?
     }
     
+    func receivedPush(notification: NSNotification
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         println(error.localizedDescription)
