@@ -15,7 +15,26 @@ import AssetsLibrary
 import CoreLocation
 import CoreMotion
 
-class ViewController: UIViewController, GPPSignInDelegate {
+class ViewController: UIViewController, GPPSignInDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    
+    
+    //table stuff
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->   UITableViewCell {
+        let cell = UITableViewCell()
+        let label = UILabel(frame: CGRect(x:0, y:0, width:200, height:50))
+        label.text = "Hello Man"
+        cell.addSubview(label)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50
+    }
+    
     
     var email = ""
     
@@ -92,14 +111,18 @@ class ViewController: UIViewController, GPPSignInDelegate {
        
     }
     
+    class func addToScreen(nameAndSubject: String){
+        
+        
+    }
+    
+    
     var signIn : GPPSignIn?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var alert = UIAlertController(title: "Hey", message: "This is  one Alert", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Working!!", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-        
+                
+                
         signIn = GPPSignIn.sharedInstance()
         signIn?.shouldFetchGoogleUserEmail = true
         signIn?.shouldFetchGooglePlusUser = true
