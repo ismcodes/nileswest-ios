@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings!) {
         
     }
@@ -41,8 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         println("got device id! \(deviceToken)")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onNotification:", name:"NotificationIdentifier", object: nil)
-        
-    }
+}
     
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
