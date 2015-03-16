@@ -10,6 +10,6 @@
 #define GooglePlusSwift_Bridging_Header_h
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
-#import <Parse/Parse.h>
-#import <Bolts/Bolts.h>
+//#import <Parse/Parse.h>
+//#import <Bolts/Bolts.h>
 #endif

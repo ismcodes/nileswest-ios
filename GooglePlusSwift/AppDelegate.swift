@@ -16,15 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        Parse.setApplicationId("t07lSqhDOB8vBZozMeOZiQUCnXiQzFk3EXlP2ewp", clientKey: "7Ife4ld4yVmqsvlGttEr1OUMryzkZoflF3mZffXh")
-        
-        var notificationType:UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-        
-        var settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
-        
-        
         return true
     }
     
@@ -35,13 +26,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         
-        var currentInstallation: PFInstallation = PFInstallation()
-        currentInstallation.setDeviceTokenFromData(deviceToken)
-        currentInstallation.channels = [ "global" ];
-        currentInstallation.saveInBackground()
         
         println("got device id! \(deviceToken)")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onNotification:", name:"NotificationIdentifier", object: nil)
+        
+        //register device and log in
+        
+        
+        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+        var tokenString = ""
+        
+        for var i = 0; i < deviceToken.length; i++ {
+            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+        }
+        
+        var request = NSMutableURLRequest(URL: NSURL(string: "http://nileswest.herokuapp.com/register")!)
+        request.HTTPMethod = "POST"
+        
+        var email = NSUserDefaults.standardUserDefaults().stringForKey("email")
+        var postString = "email="+email!+"&secret_key=DEVISING&platform=ios&token="+tokenString
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        var task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            if error != nil {
+                println("error=\(error)")
+                return
+            }
+            
+            println("response = \(response)")
+            
+            let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("responseString = \(responseString)")
+        }
+        task.resume()
+
+        
+        
+        
+        
+        request = NSMutableURLRequest(URL: NSURL(string: "http://nileswest.herokuapp.com/login")!)
+        request.HTTPMethod = "POST"
+        
+        postString = "email="+email!+"&secret_key=DEVISING&name=Isaac"
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            if error != nil {
+                println("error=\(error)")
+                return
+            }
+            
+            println("response = \(response)")
+            
+            let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("responseString = \(responseString)")
+        }
+        task.resume()
+
+        
+        
+        
+        
+        
 }
     
     
@@ -51,12 +99,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        PFPush.handlePush(userInfo)
+      println("hi A")
     }
     
     
     func onNotification(notification: NSNotification){
-        
+        println("hi B")
         
     }
     

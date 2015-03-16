@@ -145,6 +145,11 @@ class ViewController: UIViewController, GPPSignInDelegate, UITableViewDataSource
         println(auth.userEmail)
         email = auth.userEmail
         println("======")
+        NSUserDefaults.standardUserDefaults().setValue(email, forKey: "email")
+        
+        
+        if(NSURLSession.respondsToSelector(Selector("isOperatingSystemAtLeastVersion(NSOperatingSystemVersion"))){
+        
         var type = UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound;
         var setting = UIUserNotificationSettings(forTypes: type, categories: nil);
         
@@ -180,7 +185,12 @@ class ViewController: UIViewController, GPPSignInDelegate, UITableViewDataSource
         
         UIApplication.sharedApplication().registerForRemoteNotifications()
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
-        
+        }
+        else{
+            UIApplication.sharedApplication().registerForRemoteNotificationTypes(
+                                                        UIRemoteNotificationType.Sound | UIRemoteNotificationType.Badge)
+            
+        }
         func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
             if identifier == "READ_IDENTIFIER" {
                 println("User selected 'Read'")
