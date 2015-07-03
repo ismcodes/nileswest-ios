@@ -8,17 +8,16 @@
 
 import UIKit
 
+var screenCount = 0
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
     
+    var window: UIWindow?
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
         return true
     }
-    
     
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings!) {
         
@@ -40,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
         
-        var request = NSMutableURLRequest(URL: NSURL(string: "http://nileswest.herokuapp.com/register")!)
+        var request = NSMutableURLRequest(URL: NSURL(string: "https://nileswest.herokuapp.com/register")!)
         request.HTTPMethod = "POST"
         
         var email = NSUserDefaults.standardUserDefaults().stringForKey("email")
@@ -65,10 +64,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        request = NSMutableURLRequest(URL: NSURL(string: "http://nileswest.herokuapp.com/login")!)
+        request = NSMutableURLRequest(URL: NSURL(string: "https://nileswest.herokuapp.com/login")!)
         request.HTTPMethod = "POST"
         
-        postString = "email="+email!+"&secret_key=DEVISING&name=Isaac"
+        postString = "email="+email!+"&secret_key=DEVISING&name=" + NSUserDefaults.standardUserDefaults().stringForKey("name")!+"&image="+NSUserDefaults.standardUserDefaults().stringForKey("photoUrl")!
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
@@ -100,6 +99,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
       println("hi A")
+        var u = NSDictionary(dictionary: userInfo)
+        var ns = userInfo["nameandsubject"] as NSString
+//        var ns = u.valueForKey("nameandsubject")?.stringValue
+        if String(ns).rangeOfString("delete") != nil{
+        println("delete")
+        ViewController.deleteFromScreen(ns.stringByReplacingOccurrencesOfString("delete", withString: ""))
+        }
+        else{
+        println("adding "+ns+"!")
+            
+        ViewController.addToScreen(ns)
+        
+        }
     }
     
     
